@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+    <link rel="stylesheet" href="{% static 'relatorios/css/listar_relatorio.css' %}">
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    <div class="container">
+        <br>
+        <br>
+        <h1 class="titulo">Prefeitura do Município de Bertioga</h1>
+        <h6 class="titulo">Estado de São Paulo</h6>
+        <h5 class="titulo">Estância Balneária</h5>
+        <h2 class="titulo">- DIRETORIA DE DESENVOLVIMENTO AMBIENTAL -</h2>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <form action="{% url 'login' %}" method='POST'> {% csrf_token %}
+            <div class="row">
+                <div class="col-md">
+                    <p class="text-card">Digite seu nome de usuário:</p>
+                    <input class="form-control" type="text" placeholder="username" name="username">
+                </div>
+                <div class="col-md">
+                    <p class="text-card">Digite sua senha:</p>
+                    <input class="form-control" type="password" placeholder="senha" name="senha">
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class='container'>
+                <input style="float:right" class="btn btn-success" type="submit" value="Login">
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <p class="text-card">Não possui usuário e senha?</p>
+                <a class="btn btn-danger" href="{% url 'cadastro' %}">Cadastre-se aqui!</a>
+            </div>
+        </form>
+        {% if messages %}
+            {% for m in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock  %}

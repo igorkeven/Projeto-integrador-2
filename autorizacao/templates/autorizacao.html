@@ -1,0 +1,416 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+{% endblock  %}
+
+{% block 'dashboard' %}
+    <div class='container'>
+        <br>
+        <br>
+        <h1>AUTORIZAÇÃO AMBIENTAL</h1>
+        <div class="row">
+            <div onclick="exibir_formulario('1')" class="col-md card-dashboard">
+                <p class="text-card">Adicionar Autorização</p>
+            </div>
+            <div onclick="exibir_formulario('2')" class="col-md card-dashboard">
+                <p class="text-card">Atualizar Autorização</p>
+            </div>
+        </div>
+        <div class="row">
+            <a class="col-md card-dashboard" href="{% url 'listar_autorizacao' %}">
+                <button class="button-card">Listar Autorizações</button>
+            </a>
+        </div>
+        <br>
+        <div id="adicionar-autorizacao" class="adicionar-autorizacao ocultar">
+            <form action="{% url 'autorizacao' %}" method="POST">{% csrf_token %}
+                <div class='row'>
+                    <div class='col-md'>
+                        <p>Categoria</p>
+                        <input type="text" class="form-control" placeholder="AI" name="categoria">
+                    </div>
+                    <div class='col-md'>
+                        <p>Tipo</p>
+                        <input type="text" class="form-control" placeholder="FRFL" name="tipo">
+                    </div>
+                    <div class='col-md'>
+                        <p>Número</p>
+                        <input type="text" class="form-control" placeholder="num/AA" name="numero">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Emissão:</p>
+                        <input type="date" class="form-control" placeholder="__/__/____" name="emissao">
+                    </div>
+                    <div class="col-md">
+                        <p>Validade:</p>
+                        <input type="number" class="form-control" placeholder="1 (um) ano" name="validade">
+                    </div>
+                    <div class="col-md">
+                        <p>Processo Administrativo:</p>
+                        <input type="text" class="form-control" placeholder="xxxxx/xx xxx-xx-XXX-XX" name="proc_ADM">
+                    </div>
+                    <div class="col-md">
+                        <p>TCA nº:</p>
+                            <input type="text" class="form-control" placeholder="xxx/AA" name="tcaNum">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Compromitente:</p>
+                        <input type="text" class="form-control" placeholder="Fulano de Tal" name="compromitente">
+                    </div>
+                    <div class="col-md">
+                        <p>CPF/CNPJ:</p>
+                        <input type="text" class="form-control" placeholder="___.___.___-__" name="cpfcnpj">
+                    </div>
+                    <div class="col-md">
+                        <p>Inscrição Cadastral:</p>
+                        <input type="text" class="form-control" placeholder="xx.xxx.xxx.xxx" name="insc_CAD">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Endereço:</p>
+                        <input type="text" class="form-control" placeholder="Endereço" name="endereco">
+                    </div>
+                    <div class="col-md">
+                        <p>Quadra:</p>
+                        <input type="text" class="form-control" placeholder="xx" name="quadra">
+                    </div>
+                    <div class="col-md">
+                        <p>Lote:</p>
+                        <input type="text" class="form-control" placeholder="xx" name="lote">
+                        </div>
+                    <div class="col-md">
+                        <p>Bairro:</p>
+                        <input type="text" class="form-control" placeholder="Bairro" name="bairro">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Área do Lote:</p>
+                        <input type="number" class="form-control" placeholder="xxx,xx m²" name="area_lote">
+                    </div>
+                    <div class="col-md">
+                        <p>Supressão Autorizada:</p>
+                        <input type="number" class="form-control" placeholder="xxx,xx m²" name="sup_aut">
+                    </div>
+                    <div class="col-md">
+                        <p>Matrícula do Imóvel - Cartório de Registro de Imóveis:</p>
+                        <input type="text" class="form-control" placeholder="xx.xxx - xº CRI de Santos" name="matricula">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Anuência CETESB:</p>
+                        <input type="text" class="form-control" placeholder="nº xxx/AA" name="anuencia_CETESB">
+                    </div>
+                    <div class="col-md">
+                        <p>Anuência CONDEMA:</p>
+                        <input type="text" class="form-control" placeholder="nº xxx/AA" name="anuencia_CONDEMA">
+                    </div>
+                    <div class="col-md">
+                         <p>Compensação / Averbação (mínimo):</p>
+                         <input type="number" class="form-control" placeholder="xxx,xx m²" name="compensacao_averbacao">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Observações:</p>
+                        <input type="text" class="form-control" placeholder="Qualquer OBSERVAÇÃO" name="observacao">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Árvores Isoladas</h2></div>
+                        <div class="col-md">
+                        <p>Objetivo:</p>
+                        <input type="text" class="form-control" placeholder="********" name="objetivo">
+                    </div>
+                    <div class="col-md">
+                        <p>Local:</p>
+                        <input type="text" class="form-control" placeholder="********" name="local">
+                    </div>
+                    <div class="col-md">
+                        <h3>Quantidade Autorizada</h3>
+                        <p>Nativos:</p>
+                        <input type="number" class="form-control" placeholder="xx" name="nativos">
+                        <br>
+                        <p>Exóticos:</p>
+                        <input type="number" class="form-control" placeholder="xx" name="exoticos">
+                        <br>
+                        <p>Euterpe edulis:</p>
+                        <input type="number" class="form-control" placeholder="xx" name="euterpe">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Transplante de exemplares de flora:</p>
+                        <input type="text" class="form-control" placeholder="0 ********" name="transplante">
+                    </div>
+                </div>  
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Fragmento Florestal / Aglomerado de Árvores Nativas / Especial</h2></div>
+                    <div class="col-md">
+                        <p>Tipo de Vegetação:</p>
+                        <input type="text" class="form-control" placeholder="QUAL VEGETAÇÃO" name="vegetacao">
+                    </div>
+                    <div class="col-md">
+                        <p>Estágio de Sucessão predominante:</p>
+                        <input type="text" class="form-control" placeholder="QUAL ESTÁGIO" name="estagio">
+                    </div>
+                    <div class="col-md">
+                        <p>Área Autorizada:</p>
+                        <input type="number" class="form-control" placeholder="xxx,xx m²" name="area_aut">
+                    </div>
+                    <div class="col-md">
+                        <p>Recuperar - PRAD:</p>
+                        <input type="number" class="form-control" placeholder="xxx,xx m²" name="recup_PRAD">
+                    </div>
+                </div>    
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Autorização Especial</h2></div>
+                    <div class="col-md">
+                        <input type="checkbox" id="app1" name="app1" value="app1">
+                        <label for="app1"> APP (sem vegetação natural)</label>
+                        <input type="checkbox" id="app2" name="app2" value="app2">
+                        <label for="app2"> APP (sem vegetação natural)</label>
+                        <input type="checkbox" id="reserva" name="reserva" value="reserva">
+                        <label for="reserva"> Reserva Legal - Manejo</label>
+                    </div>
+                </div>     
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Locais não passíveis de corte dentro do lote</h2></div>
+                    <div class="col-md">
+                        <input type="text" class="form-control" placeholder="Preservação no interior do lote/Motivo BLA" name="restricao">
+                    </div>
+                    <div class="col-md">
+                        <p>Área (m²):</p>
+                        <input type="number" class="form-control" placeholder="xxx,xx m²" name="area_rest">
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Cadastrar" class="btn-principal">
+            </form>
+        </div>
+        <div id="atualizar-autorizacao" class="ocultar">
+            <p></p>
+            <select id="autorizacao-select" onchange="dados_autorizacao()" class="form-control">
+                <option value=""></option>
+                {% for autorizacao in autorizacoes %}
+                    <option value="{{autorizacao.id}}">{{autorizacao.numero}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <hr>
+            <div id="form-att-autorizacao">
+                <input type="hidden" id="id">
+                <div class='row'>
+                    <div class='col-md'>
+                        <p>Categoria</p>
+                        <input id = "categoria" type="text" class="form-control">
+                    </div>
+                    <div class='col-md'>
+                        <p>Tipo</p>
+                        <input id="tipo" type="text" class="form-control">
+                    </div>
+                    <div class='col-md'>
+                        <p>Número</p>
+                        <input id = "numero" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Emissão:</p>
+                        <input id="emissao" type="date" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Validade:</p>
+                        <input id="validade" type="number" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Processo Administrativo:</p>
+                        <input id="proc_ADM" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>TCA nº:</p>
+                        <input id="tcaNum" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Compromitente:</p>
+                        <input id="compromitente" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>CPF/CNPJ:</p>
+                        <input id="cpfcnpj" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Inscrição Cadastral:</p>
+                        <input id="insc_CAD" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Endereço:</p>
+                        <input id="endereco" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Quadra:</p>
+                        <input id="quadra" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Lote:</p>
+                        <input id="lote" type="text" class="form-control">
+                        </div>
+                    <div class="col-md">
+                        <p>Bairro:</p>
+                        <input id="bairro" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Área do Lote:</p>
+                        <input id="area_lote" type="number" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Supressão Autorizada:</p>
+                        <input id="sup_aut" type="number" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Matrícula do Imóvel - Cartório de Registro de Imóveis:</p>
+                        <input id="matricula" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Anuência CETESB:</p>
+                        <input id="anuencia_CETESB" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Anuência CONDEMA:</p>
+                        <input id="anuencia_CONDEMA" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                         <p>Compensação / Averbação (mínimo):</p>
+                         <input id="compensacao_averbacao" type="number" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Observações:</p>
+                        <input id="observacao" type="text" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Árvores Isoladas</h2></div>
+                        <div class="col-md">
+                        <p>Objetivo:</p>
+                        <input id="objetivo" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Local:</p>
+                        <input id="local" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <h3>Quantidade Autorizada</h3>
+                        <p>Nativos:</p>
+                        <input id="nativos" type="number" class="form-control">
+                        <br>
+                        <p>Exóticos:</p>
+                        <input id="exoticos" type="number" class="form-control">
+                        <br>
+                        <p>Euterpe edulis:</p>
+                        <input id="euterpe" type="number" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md">
+                        <p>Transplante de exemplares de flora:</p>
+                        <input id="transplante" type="text" class="form-control">
+                    </div>
+                </div>  
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Fragmento Florestal / Aglomerado de Árvores Nativas / Especial</h2></div>
+                    <div class="col-md">
+                        <p>Tipo de Vegetação:</p>
+                        <input id="vegetacao" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Estágio de Sucessão predominante:</p>
+                        <input id="estagio" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Área Autorizada:</p>
+                        <input id="area_aut" type="number" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Recuperar - PRAD:</p>
+                        <input id="recup_PRAD" type="number" class="form-control">
+                    </div>
+                </div>    
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Autorização Especial</h2></div>
+                    <div class="col-md">
+                        <input type="checkbox" id="app1">
+                        <label for="app1"> APP (sem vegetação natural)</label>
+                        <input type="checkbox" id="app2">
+                        <label for="app2"> APP (sem vegetação natural)</label>
+                        <input type="checkbox" id="reserva">
+                        <label for="reserva"> Reserva Legal - Manejo</label>
+                    </div>
+                </div>     
+                <br>
+                <div class="row">
+                    <div class="container"><h2>Locais não passíveis de corte dentro do lote</h2></div>
+                    <div class="col-md">
+                        <input id="restricao" type="text" class="form-control">
+                    </div>
+                    <div class="col-md">
+                        <p>Área (m²):</p>
+                        <input id="area_rest" type="number" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <input onclick="update_autorizacao()" type="submit" value="Salvar" class="btn btn-success">
+            </div>
+        </div>
+        {% if messages %}
+            {% for m in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <script src="{% static 'autorizacao/js/autorizacao.js' %}"></script>
+{% endblock  %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+    <link rel="stylesheet" href="{% static 'relatorios/css/listar_relatorio.css' %}">
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <a class="col-md" href="{% url 'baixar' autorizacao.id %}">Baixar PDF</a>
+        </div>
+        <br>
+        {{autorizacao.numero}}
+    </div>
+    <br>
+    <br>
+    <div class="container-fluid distanciamento">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Número</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Compromitente</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <th scope="row">{{autorizacao.id}}</th>
+                        <td>{{autorizacao.numero}}</td>
+                        <td>{{autorizacao.categoria}}</td>
+                        <td>{{autorizacao.tipo}}</td>
+                        <td>{{autorizacao.compromitente}}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock  %}

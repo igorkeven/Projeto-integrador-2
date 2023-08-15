@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+    <link rel="stylesheet" href="{% static 'relatorios/css/listar_relatorio.css' %}">
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    <div class="container">
+        <br>
+        <br>
+        <h1 class="titulo">Prefeitura do Município de Bertioga</h1>
+        <h6 class="titulo">Estado de São Paulo</h6>
+        <h5 class="titulo">Estância Balneária</h5>
+        <h2 class="titulo">- DIRETORIA DE DESENVOLVIMENTO AMBIENTAL -</h2>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <form action="{% url 'cadastro' %}" method='POST'> {% csrf_token %}
+            <div class="row">
+                <div class="col-md">
+                    <p class="text-card">Digite seu primeiro nome: </p>
+                    <input type="text" class="form-control" placeholder="primeiro nome" name="nome">
+                </div>
+                <div class='col-md'>
+                    <p class="text-card">Digite seu sobrenome: </p>
+                    <input type="text" class="form-control" placeholder="sobrenome" name="sobrenome">
+                </div>
+            </div>
+            <br>
+            <div class="row col-md">
+                <p class="text-card">Digite seu e-mail:</p>
+                <input type="email" class="form-control" placeholder="e-mail" name="email">
+            </div>
+            <br>
+            <div class='row'>
+                <div class="col-md">
+                    <p class="text-card">Digite um nome de usuário:</p>
+                    <input type="text" class="form-control" placeholder="username" name="username">
+                </div>
+                <div class="col-md">
+                    <p class="text-card">Digite uma senha:</p>
+                    <input type="password" class='form-control' placeholder="senha" name="senha">
+                </div>
+            </div>
+            <br>
+            <br>
+            <input style="float:right" class="btn btn-success" type="submit" value="Cadastrar">
+        </form>
+        {% if messages %}
+            {% for m in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock  %}

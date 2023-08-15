@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+    <link rel="stylesheet" href="{% static 'relatorios/css/listar_relatorio.css' %}">
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <a class="col-md" href="{% url 'baixar_os' relatorio.identificador %}">Baixar PDF</a>
+        </div>
+        <br>
+        {{relatorio.titulo}}
+    </div>
+{% endblock  %}

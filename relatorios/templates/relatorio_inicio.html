@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'head'  %}
+    <link rel="stylesheet" href="{% static 'autorizacao/css/autorizacao.css' %}">
+{% endblock  %}
+
+{% block 'dashboard'  %}
+    <div class="container">
+        <br>
+        <br>
+        <h1>RELATÓRIOS</h1>
+        <div class="row">
+            <a class="col-md card-dashboard" href="{% url 'novo_relatorio' %}">
+                <button class="button-card">Adicionar Relatório</button>
+            </a>
+            <a class="col-md card-dashboard" href="{% url 'listar_relatorio' %}">
+                <button class="button-card">Listar Relatórios</button>
+            </a>
+        </div>
+    </div>
+{% endblock  %}

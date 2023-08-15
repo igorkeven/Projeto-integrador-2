@@ -1,0 +1,101 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'general/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
+    <link rel="stylesheet" href="{% static 'general/css/acessibilidade.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    {% block 'head' %} {% endblock %}
+
+    <title>{% block 'title' %}{% endblock %}</title>
+  </head>
+  <body>
+    
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">SMA</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="{% url 'pagina_inicial' %}">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Página inicial</span>
+            </a>
+            <span class="tooltip">Página inicial</span>
+          </li>
+          <li>
+          <a href="#">
+            <i class='bx bx-file' ></i>
+            <span class="links_name">Termos</span>
+          </a>
+          <span class="tooltip">Termos</span>
+        </li>
+        <li>
+          <a href="{% url 'autorizacao' %}">
+            <i class='bx bx-spreadsheet' ></i>
+            <span class="links_name">Autorizações</span>
+          </a>
+          <span class="tooltip">Autorizações</span>
+        </li>
+        <li>
+          <a href="{% url 'relatorio_inicio' %}">
+            <i class='bx bx-receipt' ></i>
+            <span class="links_name">Relatórios</span>
+          </a>
+          <span class="tooltip">Relatórios</span>
+        </li>
+        <li>
+          <a href="{% url 'deslogar' %}">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Sair</span>
+          </a>
+          <span class="tooltip">Sair</span>
+        </li>
+        
+        <li class="acessibilidade" id="lupa">
+          <a href="#">
+              <i class='bx bx-zoom-in'></i>
+              <span class="links_name">Lupa</span>
+          </a>
+          <span class="tooltip">Lupa</span>
+      </li>
+        
+
+        </ul>
+      </div>
+      
+      <section class="home-section">
+          {% block 'dashboard'%}
+          {% endblock %}
+      </section>
+
+    {% block 'body' %}
+
+    <div vw class="enabled"  >
+      <div vw-access-button class="active" ></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper" ></div>
+      </div>
+    </div>
+    
+    
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+  
+
+    {% endblock %}
+    <script src="{% static 'general/js/base.js' %}"></script>
+    <script src="{% static 'general/js/acessibilidade.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

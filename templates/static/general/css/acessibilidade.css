@@ -1,0 +1,27 @@
+@import url(/templates/static/general/css/base.css);
+
+li.acessibilidade a {
+    background: linear-gradient(to bottom, #3498db, blue);
+}
+
+li.acessibilidade img{
+    height: 100%;
+    width: 100%;
+  
+}
+
+.lupa-link {
+    cursor: zoom-in;
+  }
+  
+  .lupa {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 50%;
+    border: 2px solid red;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display: none;
+}
